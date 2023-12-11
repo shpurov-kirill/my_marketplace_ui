@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-catalog',
@@ -11,7 +12,9 @@ export class CatalogComponent  implements OnInit{
 
   catalog_items:any = []
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private userService: UserServiceService
+    ) {
     
   }
   async ngOnInit() {
@@ -34,6 +37,11 @@ export class CatalogComponent  implements OnInit{
     await firstValueFrom(this.http.delete<any>(`api/catalog-item/${id}`));
     await this.refresh();
   }
+  
+  isAdmin(): boolean {
+    return this.userService.currentUserValue?.role === 'admin';
+  }
+
   
 }
 

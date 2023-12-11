@@ -1,0 +1,8 @@
+<div *ngFor="let u of user_items" style="display: flex; flex-direction: row; margin: 15px;">
+    <a
+      [title]="u['id']"
+      [routerLink]="['/edit-user', u['id']]"> {{u['id']}} {{u['name']}}
+    </a>
+    <div style="margin-left: 10px;">{{u['address']}}</div>&nbsp;
+    <div>{{u['role']}}</div>&nbsp;
+</div>

@@ -16,13 +16,19 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { authInterceptorProvider } from './auth-interceptor.service';
+import { AddUserComponent } from './add-user/add-user.component';
+import {MatCheckboxModule} from '@angular/material/checkbox'
 
 @NgModule({
   declarations: [
     AppComponent,
     CatalogComponent,
     AddNewItemComponent,
-    LoginComponent
+    LoginComponent,
+    UserListComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +41,10 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     HttpClientModule,
     MatFormFieldModule, MatInputModule, MatIconModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    MatCheckboxModule
   ],
-  providers: [],
+  providers: [authInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
