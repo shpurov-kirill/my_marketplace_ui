@@ -1,19 +1,19 @@
 <form style="margin: 15px; display: flex; flex-direction: column;" [formGroup]="createItemForm"> 
     <mat-form-field appearance="fill">
-        <mat-label>Title</mat-label>
-        <input matInput placeholder="Title" formControlName="title">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="fill">
-        <mat-label>Sub Title</mat-label>
-        <input matInput placeholder="Sub Title" formControlName="subTitle">
+        <mat-label>Category</mat-label>
+        <input matInput placeholder="Category" formControlName="category">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-error>required </mat-error> 
     </mat-form-field>
     <mat-form-field appearance="fill">
-        <mat-label>Image</mat-label>
-        <input matInput placeholder="Image" formControlName="image">
+        <mat-label>Brand</mat-label>
+        <input matInput placeholder="Brand" formControlName="brand">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-error>required </mat-error> 
     </mat-form-field>
@@ -23,12 +23,41 @@
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-error>required </mat-error> 
     </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <input matInput placeholder="Quantity" formControlName="quantity">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error>required </mat-error> 
+    </mat-form-field>
     <mat-form-field>
         <mat-label>Text</mat-label>
         <textarea matInput formControlName="text"></textarea>
         <mat-error>required </mat-error> 
       </mat-form-field>
+
+      <mat-form-field  *ngIf="isAdmin()">
+        <div>
+          <mat-toolbar>
+            <input matInput [value]="selectedFileNames.length ? selectedFileNames : 'Select Images'" />
+          </mat-toolbar>
+      
+          <input
+            type="file"
+            id="fileInput"
+            name="fileInput"
+            accept="image/*" multiple 
+            (change)="selectFiles($event)"
+          />
+        </div>
+      </mat-form-field>
+      <div>
+        <img *ngFor='let preview of previews' [src]="preview" >
+    </div>      
 </form>
-<button style="margin: 15px" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
-<a mat-raised-button color="accent" href="catalog">Cancel</a>
+
+
+<button style="margin: 15px" mat-raised-button color="primary" (click)="onSubmit()" *ngIf="isAdmin()">Submit</button>
+<a mat-raised-button color="accent" [routerLink]="['catalog']">Cancel</a>
+
+
 

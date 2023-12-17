@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div style="width: 100%; display: flex; flex-direction: column;  align-items: center;">
+    <h1 mat-dialog-title>Authentication</h1>
+
+    <div mat-dialog-content style="width: 30vw;">
+        <form style="display: flex; flex-direction: column;" [formGroup]="loginForm">
+            <mat-form-field class="full-width">
+            <input matInput placeholder="Username" formControlName="username" required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Password" formControlName="password" required>
+            </mat-form-field>
+        </form>
+        <div style="color: red;" *ngIf="errorStr">{{errorStr}}</div>
+        </div>
+        <div mat-dialog-actions>
+        <div style="flex-direction: column">
+            <div style="flex-direction: row;">
+            <button mat-raised-button color="accent" (click)="onLogin()" >Login</button>
+            </div>
+            <div style="justify-content: flex-end;">
+            <a mat-button [routerLink]="['add-user']" style="font-size: x-small; color: blue; ">I don't have an
+                account</a>
+            </div>
+        </div>
+    </div>
+</div>

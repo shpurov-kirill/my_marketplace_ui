@@ -1,0 +1,57 @@
+<div style="margin: 5px; display: flex;align-items: center; justify-content: center; flex-direction: column;">
+    <h1>Shopping card</h1>
+
+    <table matSort (matSortChange)="sortData($event)">
+        <tr>
+         <th mat-sort-header="brand" >Brand</th>
+         <th mat-sort-header="category">Category</th>
+          <th mat-sort-header="name">Name</th>
+          <th mat-sort-header="text">Text</th>
+          <th mat-sort-header="price">Price</th>
+        </tr>
+      
+          <tr *ngFor="let it of sortedData; index as i">
+            <td>{{it.brand}}</td>
+            <td>{{it.category}}</td>
+            <td>{{it.name}}</td>
+            <td>{{it.text}}</td>
+            <td>{{it.price}}</td>
+            <td><button mat-raised-button color="accent" (click)="remove(i)">remove</button></td>
+          </tr>
+      </table>
+      <h1>Total Price: {{total()}}</h1>
+
+      <mat-card *ngIf="total() > 0">
+        <mat-card-title>Credit Card Information</mat-card-title>
+        <mat-card-content>
+          <form>
+            <mat-form-field appearance="fill">
+              <mat-label>Card Number</mat-label>
+              <input matInput placeholder="1234 5678 9012 3456" />
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill">
+              <mat-label>Cardholder Name</mat-label>
+              <input matInput placeholder="John Doe" />
+            </mat-form-field>
+      
+            <div class="form-row">
+              <mat-form-field appearance="fill">
+                <mat-label>Expiration Date</mat-label>
+                <input matInput placeholder="MM/YY" />
+              </mat-form-field>
+      
+              <mat-form-field appearance="fill">
+                <mat-label>CVV</mat-label>
+                <input matInput placeholder="123" />
+              </mat-form-field>
+            </div>
+      
+            <button mat-raised-button color="primary" (click)="submit()" *ngIf="!loading">Submit</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      <div style="color: red;" *ngIf="error"> {{ error}}</div>
+      <mat-spinner *ngIf="loading"></mat-spinner>
+      <div style="color: green;" *ngIf="orderId"> Thanks for your purchase, the order  number is {{ orderId}}</div>
+</div>
