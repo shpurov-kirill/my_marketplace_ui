@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-add-new-item',
@@ -18,6 +19,7 @@ export class AddNewItemComponent {
   id:string | null = null;
   
   constructor(
+    private userService: UserServiceService,
     private router: Router,
     private formBuilder: UntypedFormBuilder,
     private http: HttpClient,
@@ -96,5 +98,9 @@ export class AddNewItemComponent {
       this.selectedFileNames.push(this.selectedFiles[i].name);
     }
   }
+}
+
+isAdmin(): boolean {
+  return this.userService.currentUserValue?.role === 'admin';
 }
 }

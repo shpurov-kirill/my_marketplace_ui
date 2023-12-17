@@ -35,7 +35,7 @@
         <mat-error>required </mat-error> 
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field  *ngIf="isAdmin()">
         <div>
           <mat-toolbar>
             <input matInput [value]="selectedFileNames.length ? selectedFileNames : 'Select Images'" />
@@ -56,8 +56,8 @@
 </form>
 
 
-<button style="margin: 15px" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
-<a mat-raised-button color="accent" href="catalog">Cancel</a>
+<button style="margin: 15px" mat-raised-button color="primary" (click)="onSubmit()" *ngIf="isAdmin()">Submit</button>
+<a mat-raised-button color="accent" [routerLink]="['catalog']">Cancel</a>
 
 
 

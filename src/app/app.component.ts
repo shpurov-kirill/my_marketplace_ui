@@ -15,16 +15,20 @@ export class AppComponent {
   isUserLoggedIn = false;
   username = '';
   token = '';
+  cardCount = ''
 
   constructor(private userServiceService: UserServiceService,
     private router: Router) {
 
-    this.userServiceService.currentUserObservable
-    .pipe().subscribe(u => {
+    this.userServiceService.currentUserObservable.subscribe(u => {
       this.isAdmin = u?.role === 'admin';
       this.username = u.username;
       this.token = u.token;
       this.isUserLoggedIn = (u.username || '').length > 0 ;
+    });
+
+    this.userServiceService.cartCountObservable.subscribe(n => {
+      this.cardCount = '' + (n.valueOf() > 0 ? n: '')
     });
 
   }

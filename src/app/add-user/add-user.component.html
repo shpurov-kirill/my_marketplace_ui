@@ -14,6 +14,6 @@
     <mat-checkbox formControlName="isAdmin" *ngIf="id !== null">Is Admin</mat-checkbox>
 </form>
 <button style="margin: 15px" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
-<a mat-raised-button color="accent" href="catalog">Cancel</a>
+<a mat-raised-button color="accent" [routerLink]="['catalog']">Cancel</a>
 
 

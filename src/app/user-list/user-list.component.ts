@@ -10,6 +10,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class UserListComponent {
   user_items = [];
+  displayedColumns: string[] = ['id', 'name', 'address'];
   constructor(private http: HttpClient,
     private userService: UserServiceService
   ) {

@@ -1,10 +1,44 @@
 
+<table matSort (matSortChange)="sortData($event)">
+  <tr>
+   <th mat-sort-header="brand" >Brand</th>
+   <th mat-sort-header="category">Category</th>
+    <th mat-sort-header="name">Name</th>
+    <th mat-sort-header="quantity">Quantity</th>
+    <th mat-sort-header="price">Price</th>
+    <th mat-sort-header="text">Text</th>
+  </tr>
+</table>
+
+<form  [formGroup]="filterForm"> 
+  &nbsp;
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option  *ngFor="let c of uniqueValues('category')" [value]="c">{{c}}</mat-option>
+    </mat-select>
+  </mat-form-field> &nbsp;
+  <mat-form-field>
+    <mat-label>Brand</mat-label>
+    <mat-select formControlName="brand">
+      <mat-option  *ngFor="let c of uniqueValues('brand')" [value]="c">{{c}}</mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp;
+  <mat-form-field>
+    <mat-label>Model</mat-label>
+    <mat-select>
+      <mat-option  *ngFor="let c of uniqueValues('model')" [value]="c">{{c}}</mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp;
+  <button mat-button (click)="filter()">Filter</button>
+  <button mat-button color="accent" (click)="reset()">Reset</button>
+</form>
 
 <div style="display: flex; flex-direction: row; flex-wrap:wrap; justify-content: space-around;">
-<mat-card class="example-card"  *ngFor="let c of catalog_items" style="margin: 15px;">
+<mat-card class="example-card"  *ngFor="let c of sortedData" style="margin: 15px;">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{c.name}}</mat-card-title>
+      <mat-card-title>{{c.name}}, ${{c.price}}</mat-card-title>
       <mat-card-subtitle>{{c.category}}, Brand: {{c.brand}}, Qnt: {{c.quantity}} item id: {{c.id}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="c.image">
@@ -12,9 +46,9 @@
       <p>{{c.text}}</p>
     </mat-card-content>
     <mat-card-actions >
-      <button mat-raised-button (click)="addToCard(c.id)">Add To Card</button>&nbsp;
-    <a  mat-raised-button color="primary"
-        [routerLink]="['/edit-item', c.id]"> Edit
+      <button mat-raised-button (click)="addToCard(c)">Add To Card</button>&nbsp;
+    <a  mat-raised-button color="primary" 
+        [routerLink]="['/edit-item', c.id]"> Details
     </a>&nbsp;
     <button mat-raised-button color="accent" (click)="deleteItem(c.id)" *ngIf="isAdmin()">Delete</button>&nbsp;
     </mat-card-actions>
