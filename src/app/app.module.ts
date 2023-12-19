@@ -31,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import { mockInterceptorProvider } from './mock-interceptor.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatTableModule,
     
   ],
-  providers: [authInterceptorProvider, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [ authInterceptorProvider, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   //providers: [ mockInterceptorProvider ],
   bootstrap: [AppComponent],
 })
