@@ -65,8 +65,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatTableModule,
     
   ],
-  //providers: [authInterceptorProvider, {provide: LocationStrategy, useClass: HashLocationStrategy}],
-  providers: [ mockInterceptorProvider ],
+  providers: [authInterceptorProvider, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  //providers: [ mockInterceptorProvider ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
